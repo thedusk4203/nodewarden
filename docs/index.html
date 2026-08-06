@@ -44,7 +44,7 @@ BACKUP_TRANSFER_RUNNER     Durable Object
 ASSETS                     Static Assets</code></pre></div></div></article>
 </div></section>
 
-<section id="jwt"><h2>3. Thiết lập JWT_SECRET</h2><p>Tạo secret ngẫu nhiên dài ít nhất 32 ký tự. Không dùng chuỗi mẫu và không commit lên GitHub.</p><h3>Linux hoặc macOS</h3><div class="code"><button class="copy">Copy</button><pre><code>openssl rand -base64 48</code></pre></div><h3>Windows PowerShell</h3><div class="code"><button class="copy">Copy</button><pre><code>$bytes = New-Object byte[] 48
+<section id="jwt"><h2>3. Thiết lập JWT_SECRET</h2><p>Tạo secret ngẫu nhiên dài ít nhất 32 ký tự. Không dùng chuỗi mẫu và không commit lên GitHub. Nhớ lưu lại nhé!</p><h3>Linux hoặc macOS</h3><div class="code"><button class="copy">Copy</button><pre><code>openssl rand -base64 48</code></pre></div><h3>Windows PowerShell</h3><div class="code"><button class="copy">Copy</button><pre><code>$bytes = New-Object byte[] 48
 [Security.Cryptography.RandomNumberGenerator]::Fill($bytes)
 [Convert]::ToBase64String($bytes)</code></pre></div><p>Thêm secret tại:</p><div class="code"><button class="copy">Copy</button><pre><code>Workers & Pages
 → nodewarden
@@ -52,7 +52,7 @@ ASSETS                     Static Assets</code></pre></div></div></article>
 → Variables and Secrets
 → Add Secret</code></pre></div><table><thead><tr><th>Trường</th><th>Giá trị</th></tr></thead><tbody><tr><td>Name</td><td><code>JWT_SECRET</code></td></tr><tr><td>Value</td><td>Chuỗi vừa tạo</td></tr></tbody></table><div class="notice warn">Không tự ý thay JWT_SECRET sau khi đã vận hành. Việc đổi secret có thể làm mất hiệu lực token và gây lỗi cấu hình backup.</div></section>
 
-<section id="domain"><h2>4. Gắn custom domain</h2><p>Vào <strong>Worker → Settings → Domains &amp; Routes → Add → Custom Domain</strong>.</p><div class="code"><button class="copy">Copy</button><pre><code>vault.example.com</code></pre></div><p>Server URL trong ứng dụng Bitwarden:</p><div class="code"><button class="copy">Copy</button><pre><code>https://vault.example.com</code></pre></div><div class="notice">Không thêm <code>/api</code>, <code>/identity</code> hoặc <code>/web</code>.</div></section>
+<section id="domain"><h2>4. Gắn custom domain(có thể bỏ qua)</h2><p>Vào <strong>Worker → Settings → Domains &amp; Routes → Add → Custom Domain</strong>.</p><div class="code"><button class="copy">Copy</button><pre><code>vault.example.com</code></pre></div><p>Server URL trong ứng dụng Bitwarden:</p><div class="code"><button class="copy">Copy</button><pre><code>https://vault.example.com</code></pre></div><div class="notice">Không thêm <code>/api</code>, <code>/identity</code> hoặc <code>/web</code>.</div></section>
 
 <section id="backup"><h2>5. Backup lên Cloudflare R2</h2><div class="steps">
 <article class="step"><div><h3>Tạo bucket riêng</h3><div class="code"><button class="copy">Copy</button><pre><code>nodewarden-backup</code></pre></div><p>Không dùng chung bucket attachment làm nơi backup.</p></div></article>
